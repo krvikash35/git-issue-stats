@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/krvikash35/git-repo-issue-stats#readme",
   "dependencies": {
-    "express": "4.13.3"
+    "angular": "1.4.8",
+    "bootstrap": "3.3.6",
+    "express": "4.13.3",
+    "font-awesome": "4.5.0"
   }
 }

@@ -21,20 +21,18 @@
 
     //Request git api to check open issue of given git repo URL
     function checkOpenIssue(gitRepoURL){
-      console.log("checking for open issue at gitURL: "+gitRepo.repoURL);
-      gitRepo.responseStatus="started";
+      gitRepo.responseStatus="awaiting";
       $http.get("https://api.github.com/repos" + gitRepoURL.split("github.com")[1], {params: {"state": "open"}} )
       .success(function(openIssuesRes){
+        gitRepo.responseStatus="success";
         gitRepo.totalOpenIssue = openIssuesRes.length;
         gitRepo.totalOpenIssueLast24Hr = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-1000*24*3600000 ),     ( new Date().getTime()) );
         gitRepo.totalOpenIssueBetween7DAnd24H = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()) );
         gitRepo.totalOpenIssueMoreThan7D = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()-24*3600000) );
       })
       .error(function(openIssuesRes){
-        gitRepo.errorRes=openIssuesRes;
-      })
-      .finally(function(){
-        gitRepo.responseStatus="finished";
+        gitRepo.responseStatus="error";
+        gitRepo.errorRes=openIssuesRes.message;
       })
     }
 

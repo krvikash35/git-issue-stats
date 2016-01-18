@@ -1,6 +1,9 @@
 # git-issue-stats
 webapp to show the statistic of any git repo's issues
 
+#Demo at
+https://git-repo-issue-stats.herokuapp.com/
+
 #Front end framework
 angular
 bootstrap
@@ -19,5 +22,5 @@ openIssues. It also show a waiting-spinner until response comes. Depending on er
 proper msg is shown. This function internally call 'countOpenIssueByCreateDate(openIssues, fromInMilli, toInMilli)'
 to get all required stats.
 
-#'countOpenIssueByCreateDate(openIssues, fromInMilli, toInMilli)'
+#countOpenIssueByCreateDate(openIssues, fromInMilli, toInMilli)
 This function return the count of open issue within given time, from and to date should be in MilliSecond.

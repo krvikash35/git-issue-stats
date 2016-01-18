@@ -15,20 +15,20 @@
     gitRepo.totalOpenIssueLast24Hr = 0;
     gitRepo.totalOpenIssueBetween7DAnd24H = 0;
     gitRepo.totalOpenIssueMoreThan7D = 0;
-    gitRepo.checkOpenIssue = checkOpenIssue;
+    gitRepo.getOpenIssue = getOpenIssue;
 
 
 
     //Request git api to check open issue of given git repo URL
-    function checkOpenIssue(gitRepoURL){
+    function getOpenIssue(gitRepoURL){
       gitRepo.responseStatus="awaiting";
       $http.get("https://api.github.com/repos" + gitRepoURL.split("github.com")[1], {params: {"state": "open"}} )
       .success(function(openIssuesRes){
         gitRepo.responseStatus="success";
         gitRepo.totalOpenIssue = openIssuesRes.length;
-        gitRepo.totalOpenIssueLast24Hr = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-1000*24*3600000 ),     ( new Date().getTime()) );
-        gitRepo.totalOpenIssueBetween7DAnd24H = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()) );
-        gitRepo.totalOpenIssueMoreThan7D = filterOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()-24*3600000) );
+        gitRepo.totalOpenIssueLast24Hr = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-1000*24*3600000 ),     ( new Date().getTime()) );
+        gitRepo.totalOpenIssueBetween7DAnd24H = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()) );
+        gitRepo.totalOpenIssueMoreThan7D = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()-24*3600000) );
       })
       .error(function(openIssuesRes){
         gitRepo.responseStatus="error";
@@ -38,7 +38,7 @@
 
 
     //return count of open issues, created within given time, time should be in MilliSecond
-    function filterOpenIssueByCreateDate(openIssues, fromInMilli, toInMilli){
+    function countOpenIssueByCreateDate(openIssues, fromInMilli, toInMilli){
       var totalFilteredCount = 0;
       for(var i=openIssues.length; i--;){
         openIssueCreateDate = new Date(openIssues[i].created_at).getTime();

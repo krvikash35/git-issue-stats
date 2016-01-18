@@ -3,6 +3,10 @@ var app = express();
 app.use(express.static("node_modules"));
 app.use(express.static("app"));
 
-app.listen(process.env.PORT, '0.0.0.0', function () {
-  console.log("server listening on port: 8081");
+
+var APP_PORT = process.env.PORT || 3000;
+var APP_HOST = process.env.HOST || '0.0.0.0';
+
+app.listen(APP_PORT, APP_HOST, function () {
+  console.log("server listening on: "+ APP_HOST + ":" + APP_PORT);
 })

@@ -22,9 +22,9 @@
     //Request git api to check open issue of given git repo URL
     function getOpenIssue(gitRepoURL){
       gitRepo.responseStatus="awaiting";
-      $http.get("https://api.github.com/repos" + gitRepoURL.split("github.com")[1], {params: {"state": "open"}} )
+      //github gives paginated response for maximum of 300 event having 30 item per page
+      $http.get("https://api.github.com/repos" + gitRepoURL.split("github.com")[1], {params: {"state": "open", "page":1}} )
       .success(function(openIssuesRes){
-        console.log(openIssuesRes);
         gitRepo.responseStatus="success";
         gitRepo.totalOpenIssue = openIssuesRes.length;
         gitRepo.totalOpenIssueLast24Hr = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-24*3600000 ),     ( new Date().getTime()) );
@@ -43,8 +43,12 @@
       var totalFilteredCount = 0;
       for(var i=openIssues.length; i--;){
         openIssueCreateDate = new Date(openIssues[i].created_at).getTime();
+        console.log(openIssueCreateDate);
+        console.log(fromInMilli);
+        console.log(toInMilli);
         if ( openIssueCreateDate > fromInMilli && openIssueCreateDate <= toInMilli ){
           totalFilteredCount = totalFilteredCount + 1;
+          console.log("matched");
         }
       }
       return totalFilteredCount;

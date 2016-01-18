@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-<title>webapp to show the statistic of any git repo's issues</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="app.css"></link>
+  <title>webapp to show the statistic of any git repo's issues</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css"></link>
+  <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"></link>
 </head>
-
-</body>
-<h1>Hello</h1>
+<body ng-controller="GitRepoController as gitRepo">
 
 
-</body>
-<script type="application/javascript" src="lib/angular/angular.min.js"></script>
-<script type="application/javascript" src="app.js"></script>
-</html>
+  <!-- header -->
+  <div class="jumbotron">
+    <h1>Git Repo Stats</h1>
+    <p>Checkout the specific stats of open issue with of git repository.</p>
+  </div>
+
+
+
+
+
+
+  <!-- Form to handle user input -->
+  <div style="text-align:center;margin-top:20px;margin-bottom:20px" class="container well">
+    <form class="form-inline" ng-submit="gitRepo.checkOpenIssue(gitRepo.repoURL)">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">Git</div>
+          <input ng-model="gitRepo.repoURL" type="url" class="form-control"  placeholder="Enter Repo URL..." id="gitURL" required>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+
+
+
+
+  <!-- table control to show ouptput to user-->
+  <div class="container well">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th>Total</th>
+          <th>In last 24 hours</th>
+          <th>More than 24Hrs, less than 7Days</th>
+          <th>More than 7Days</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{gitRepo.totalOpenIssue}}</td>
+            <td>{{gitRepo.totalOpenIssueLast24Hr}}</td>
+            <td>{{gitRepo.totalOpenIssueBetween7DAnd24H}}</td>
+            <td>{{gitRepo.totalOpenIssueMoreThan7D}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- error response to show to user -->
+  <label class="alert alert-danger">{{gitRepo.errorRes}}</lable>
+
+
+
+
+
+  </body>
+  <script type="application/javascript" src="lib/angular/angular.min.js"></script>
+  <script type="application/javascript" src="app.js"></script>
+  </html>

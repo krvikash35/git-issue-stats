@@ -5,13 +5,13 @@ webapp to show the statistic of any git repo's issues
 https://git-repo-issue-stats.herokuapp.com/
 
 #Front end framework
-angular
-bootstrap
-font-awesome
+angular;
+bootstrap;
+font-awesome;
 
 #Back-end framework
-node
-express
+node;
+express;
 
 #Explanation
 There is one module('app') which has one controller('GitRepoController').

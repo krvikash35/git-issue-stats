@@ -3,8 +3,8 @@
 <head>
   <title>webapp to show the statistic of any git repo's issues</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="app.css"></link>
   <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"></link>
 </head>
 <body ng-controller="GitRepoController as gitRepo">
 
@@ -12,7 +12,7 @@
   <!-- header -->
   <div class="jumbotron">
     <h1>Git Repo Stats</h1>
-    <p>Checkout the specific stats of open issue with of git repository.</p>
+    <p>Checkout the specific stats of open issue  of any git repository. Please enter the complete repo issue link</p>
   </div>
 
 
@@ -38,7 +38,7 @@
   <!-- show user the waiting spinner visual, when he submit the request button, until we get the response from server -->
   <div ng-switch="gitRepo.responseStatus">
     <div ng-switch-when="started">
-      <h1>Awaiting</h1>
+      <h1 class="text-center"><i class="fa fa-spinner fa-spin fa-2x "></i></h1>
     </div>
 
     <div ng-switch-when="finished">

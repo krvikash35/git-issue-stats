@@ -24,11 +24,12 @@
       gitRepo.responseStatus="awaiting";
       $http.get("https://api.github.com/repos" + gitRepoURL.split("github.com")[1], {params: {"state": "open"}} )
       .success(function(openIssuesRes){
+        console.log(openIssuesRes);
         gitRepo.responseStatus="success";
         gitRepo.totalOpenIssue = openIssuesRes.length;
-        gitRepo.totalOpenIssueLast24Hr = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-1000*24*3600000 ),     ( new Date().getTime()) );
-        gitRepo.totalOpenIssueBetween7DAnd24H = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()) );
-        gitRepo.totalOpenIssueMoreThan7D = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()-24*3600000) );
+        gitRepo.totalOpenIssueLast24Hr = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-24*3600000 ),     ( new Date().getTime()) );
+        gitRepo.totalOpenIssueBetween7DAnd24H = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()-24*3600000) );
+        gitRepo.totalOpenIssueMoreThan7D = countOpenIssueByCreateDate(openIssuesRes, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()) );
       })
       .error(function(openIssuesRes){
         gitRepo.responseStatus="error";
@@ -42,7 +43,7 @@
       var totalFilteredCount = 0;
       for(var i=openIssues.length; i--;){
         openIssueCreateDate = new Date(openIssues[i].created_at).getTime();
-        if ( openIssueCreateDate > fromInMilli && openIssueCreateDate < toInMilli ){
+        if ( openIssueCreateDate > fromInMilli && openIssueCreateDate <= toInMilli ){
           totalFilteredCount = totalFilteredCount + 1;
         }
       }

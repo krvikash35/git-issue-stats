@@ -1,0 +1,27 @@
+{
+  "name": "git-repo-issue-stats",
+  "version": "1.0.0",
+  "description": "webapp to show the statistic of any git repo's issues",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krvikash35/git-repo-issue-stats.git"
+  },
+  "keywords": [
+    "angularjs",
+    "nodejs"
+  ],
+  "author": "vikash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krvikash35/git-repo-issue-stats/issues"
+  },
+  "homepage": "https://github.com/krvikash35/git-repo-issue-stats#readme",
+  "dependencies": {
+    "express": "4.13.3"
+  }
+}

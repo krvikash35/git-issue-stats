@@ -87,8 +87,10 @@
       $q.all(OIPerPage)
       .then(function(OIPerPage){
         for( var i=0; i<totalPage; i++ ){
-          if ( OIPerPage[i].status != 200 )
+          if ( OIPerPage[i].status != 200 ){
+            console.log(OIPerPage);
           defer.reject('Error response from server')
+          }
           var currPageData = OIPerPage[i].data;
           for( var j=0; j<currPageData.length; j++ )
           OIByPage.push(currPageData[j])

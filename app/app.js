@@ -38,7 +38,8 @@
         gitRepo.totalOpenIssue = gitRepoOIByPage.length;
         gitRepo.totalOpenIssueLast24Hr = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-24*3600000 ),     ( new Date().getTime()) );
         gitRepo.totalOpenIssueBetween7DAnd24H = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()-24*3600000) );
-        gitRepo.totalOpenIssueMoreThan7D = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()) );
+        gitRepo.totalOpenIssueMoreThan7D = gitRepo.totalOpenIssue - (gitRepo.totalOpenIssueLast24Hr + gitRepo.totalOpenIssueBetween7DAnd24H)
+
       })
       .catch(function(err){
         gitRepo.responseStatus="error";

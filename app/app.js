@@ -43,9 +43,6 @@
       var totalFilteredCount = 0;
       for(var i=openIssues.length; i--;){
         openIssueCreateDate = new Date(openIssues[i].created_at).getTime();
-        console.log(openIssueCreateDate);
-        console.log(fromInMilli);
-        console.log(toInMilli);
         if ( openIssueCreateDate > fromInMilli && openIssueCreateDate <= toInMilli ){
           totalFilteredCount = totalFilteredCount + 1;
         }

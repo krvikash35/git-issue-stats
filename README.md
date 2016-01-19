@@ -4,8 +4,6 @@ webapp to show the statistic of any git repo's issues
 #Demo at
 https://git-repo-issue-stats.herokuapp.com/
 
-#N.B
-incomplete, need to implement pagination request to git api to get complete info about openIssue
 
 #Front end framework
 angular;

@@ -26,7 +26,7 @@
       var gitRepoOILastPageNo = null;
       var gitRepoOIByPage = [];
 
-      //github gives paginated response for maximum of 300 event having 30 item per page
+      // github gives paginated response for maximum of 300 event having 30 item per page
       $http.get( gitRepoOIApiURL , {params: {"state": "open", "page":1}} )
       .then( function processApiRes(response){
         gitRepoOILastPageNo = getGitRepoOILastPageNo(response.headers('Link'))
@@ -35,17 +35,15 @@
       .then( function processData(data){
         gitRepo.responseStatus="success";
         gitRepoOIByPage = data;
-        $scope.$apply();
         gitRepo.totalOpenIssue = gitRepoOIByPage.length;
         gitRepo.totalOpenIssueLast24Hr = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-24*3600000 ),     ( new Date().getTime()) );
         gitRepo.totalOpenIssueBetween7DAnd24H = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-7*24*3600000 ), ( new Date().getTime()-24*3600000) );
         gitRepo.totalOpenIssueMoreThan7D = getGitRepoOICount(gitRepoOIByPage, ( new Date().getTime()-7*24*3600000 ),      ( new Date().getTime()) );
       })
-      .finally(function(err){
+      .catch(function(err){
         gitRepo.responseStatus="error";
-        gitRepo.errorRes=err.message;
+        gitRepo.errorRes=err;
       })
-
     }
 
 

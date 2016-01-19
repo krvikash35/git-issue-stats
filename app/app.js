@@ -34,7 +34,6 @@
       })
       .then( function processData(data){
         gitRepo.responseStatus="success";
-        console.log(data);
         gitRepoOIByPage = data;
         $scope.$apply();
         gitRepo.totalOpenIssue = gitRepoOIByPage.length;
@@ -53,7 +52,6 @@
 
     //return count of open issues, created within given time, time should be in MilliSecond
     function getGitRepoOICount(openIssues, fromInMilli, toInMilli){
-      console.log("called getGitRepoOICount");
       var totalFilteredCount = 0;
       for(var i=openIssues.length; i--;){
         openIssueCreateDate = new Date(openIssues[i].created_at).getTime();
@@ -70,7 +68,6 @@
     function getGitRepoOILastPageNo(headerLink){
       var lastPageNo = 1;
       if ( !headerLink ){
-        console.log(headerLink);
         return lastPageNo;
       }
       var lastPageURLSeg = headerLink.split(',')[1].split(';')[0];

@@ -48,7 +48,6 @@
         console.log(toInMilli);
         if ( openIssueCreateDate > fromInMilli && openIssueCreateDate <= toInMilli ){
           totalFilteredCount = totalFilteredCount + 1;
-          console.log("matched");
         }
       }
       return totalFilteredCount;

@@ -42,7 +42,10 @@
       })
       .catch(function(err){
         gitRepo.responseStatus="error";
-        gitRepo.errorRes=err;
+        if( err.status && err.status==-1)
+          gitRepo.errorRes = "CONN_TIMED_OUT: pls check url or connection"
+        else
+          gitRepo.errorRes=err;
       })
     }
 

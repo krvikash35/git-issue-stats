@@ -73,7 +73,8 @@
         return lastPageNo;
       }
       var lastPageURLSeg = headerLink.split(',')[1].split(';')[0];
-      lastPageNo = lastPageURLSeg.charAt(lastPageURLSeg.indexOf("page=")+5);
+      lastPageNo = lastPageURLSeg.substring(lastPageURLSeg.indexOf('=')+1, lastPageURLSeg.indexOf('&'));
+      console.log("Total page for open issue of this repo: ", lastPageNo);
       return lastPageNo;
     }
 

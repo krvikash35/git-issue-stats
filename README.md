@@ -13,6 +13,7 @@ font-awesome;
 #Back-end framework
 node;
 express;
+MongoDB
 
 #Explanation
 There is one module('app') which has one controller('GitRepoController').

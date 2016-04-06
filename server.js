@@ -9,4 +9,4 @@ var APP_HOST = process.env.HOST || '0.0.0.0';
 
 app.listen(APP_PORT, APP_HOST, function () {
   console.log("server listening on: "+ APP_HOST + ":" + APP_PORT);
-})
+});
